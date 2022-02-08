@@ -4,6 +4,8 @@ const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const router = require('./routes'); // Routes
 
+const { connect } = require('./config/db');
+
 // Logs
 const Logger = require('./config/winston');
 const MorganMiddleware = require('./config/morgan');
@@ -26,6 +28,11 @@ app.use((err, req, res, next) => {
   Logger.error(err);
   if (res.headersSent) return next(err);
   return res.status(500).json({ message: 'Server error' });
+});
+
+// Database
+connect().catch((e) => {
+  Logger.error(e.message);
 });
 
 const PORT = process.env.APP_PORT || 3000;

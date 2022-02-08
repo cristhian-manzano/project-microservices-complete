@@ -1,14 +1,9 @@
 const { Router } = require('express');
+const { getAll, create } = require('../controllers/user');
 
 const router = Router();
 
-router.get('/auth', (req, res, next) => {
-  try {
-    JSON.parse('-{}');
-    // throw new Error('Bad route!!!');
-  } catch (e) {
-    next(e);
-  }
-});
+router.get('/users', getAll);
+router.post('/users', create);
 
 module.exports = router;
