@@ -4,12 +4,12 @@ const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const router = require('./routes'); // Routes
 
+// Database
 const { connect } = require('./config/db');
 
 // Logs
 const Logger = require('./config/winston');
 const MorganMiddleware = require('./config/morgan');
-
 const swaggerDocument = require('../docs/swagger.json');
 
 const app = express();
